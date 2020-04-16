@@ -1,7 +1,7 @@
 import pymysql
 import pymysql.cursors
 
-class Database:
+class Database(pymysql.cursors):
 
     def __init__(self, porta, host, user, password, database, enconding="utf8mb4"):
         self.__porta = porta;
@@ -12,6 +12,7 @@ class Database:
         self.__enconding = enconding;
         self.__cursorclass = pymysql.cursors.DictCursor;
         self.__conexao = None;
+        self.__cursor = None;
 
     @property
     def getPorta(self):
@@ -41,6 +42,14 @@ class Database:
     def getCursorClass(self):
         return self.__cursorclass;
 
+    @property
+    def getConexao(self):
+        return self.__conexao;
+
+    @property
+    def getCursor(self):
+        return self.__cursor;
+
     @setPorta.setter
     def setPorta(self, porta):
         self.__porta = porta;
@@ -69,6 +78,10 @@ class Database:
     def setConexao(self, conexao):
         self.__conexao = conexao;
 
+    @setCursor.setter
+    def setCursor(self, cursor):
+        self.__cursor = cursor;
+
     #Todos esses podem ser iguais e sua funcionalidade pode ser dividida dentro do python
     def ExisteRegistro(self, NomeTabela, Campo, Parametro):
 
@@ -77,3 +90,27 @@ class Database:
     def ContaRegistro(self, NomeTabela, Campo, Parametro):
 
     def ConectarBase(self):
+        self.setConexao = pymysql.connect(
+            port=self.getPorta,
+            host=self.getHost,
+            user=self.getUser,
+            password=self.getPassword,
+            db=self.getDatabase,
+            charset=self.getEnconding,
+            cursorclass=self.getCursorClass
+        );
+
+    def DesconectarBase(self):
+        self.setConexao.close
+
+"""        
+        self.setCursor = self.getConexao.cursor
+        
+        
+        
+        self.setCursor.close();
+        self.setCursor = None;
+        
+
+        self.setConexao.close();
+        self.setConexao = None;"""

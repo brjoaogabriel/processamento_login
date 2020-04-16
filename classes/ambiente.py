@@ -1,9 +1,11 @@
-class Ambiente(Dispositivo):
+import datetime
+import platfrom
+
+class Ambiente():
 
     def __init__(self):
-        super().__init__();
         self.__horario = {'hora': datetime.datetime.now().hour, 'minuto': datetime.datetime.now().minute};
-        self.__quantidadetentatvias = ContaLogs(super().getMaquina);
+        self.__quantidadetentativas = ContaLogs(platform.node);
 
     @property
     def getHorario(self):
@@ -11,33 +13,32 @@ class Ambiente(Dispositivo):
 
     @property
     def getQuantidadeTentativas(self):
-        return self.__quantidadetentatvias;
+        return self.__quantidadetentativas;
 
-    @Horario.setter
+    @setHorario.setter
     def setHorario(self, horario):
         self.__horario = horario;
 
-    @QuantidadeTentativas.setter
+    @setQuantidadeTentativas.setter
     def setQuantidadeTentatvias(self, quantidadetentativas):
-        self.__quantidadetentatvias = quantidadetentativas;
+        self.__quantidadetentativas = quantidadetentativas;
 
     def ConfereHorario(self, maquina):
         QuantidadeAmostragemValida = 10;
-        Horarios = BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, Dispositivo.getMaquina);
+        Horarios = BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, maquina);
 
-        if len(Horarios > QuantidadeAmostragemValida):
+        if len(Horarios) > QuantidadeAmostragemValida:
             if EstaEntre(self.getHorario, min(Horarios), max(Horarios)) == True:
                 return True;
             else:
                 return False;
+        else:
+            return True;
 
     def ConfereQuantidadeTentativas(self):
-        try:
-            if self.getQuantidadeTentativas < 5:
-                return True;
-            else:
-                return False;
-        except:
-            print("Erro de execução");
+        if self.getQuantidadeTentativas < 5:
+            return True;
+        else:
+            return False;
 
 

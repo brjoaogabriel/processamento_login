@@ -4,6 +4,7 @@ import os
 class Dispositivo(Usuario):
 
     def __init__(self):
+        super().__init__()
         self.__sistemaoperacional = platform.system();
         self.__login = os.getlogin();
         self.__maquina = platform.node();

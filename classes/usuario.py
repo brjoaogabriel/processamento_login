@@ -17,15 +17,15 @@ class Usuario:
     def getEmail(self):
         return self.__email;
 
-    @Login.setter
+    @setLogin.setter
     def setLogin(self, login):
         self.__login = login;
 
-    @Senha.setter
+    @setSenha.setter
     def setSenha(self, senha):
         self.__senha = senha;
 
-    @Email.setter
+    @setEmail.setter
     def setEmail(self, email):
         self.__email = email;
 

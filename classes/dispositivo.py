@@ -21,20 +21,20 @@ class Dispositivo(Usuario):
     def getMaquina(self):
         return self.__maquina;
 
-    @SistemaOperacional.setter
+    @setSistemaOperacional.setter
     def setSistemaOperacional(self, sistemaoperacional):
         self.__sistemaoperacional = sistemaoperacional;
 
-    @Login.setter
+    @setLogin.setter
     def setLogin(self, login):
         self.__login = login;
 
-    @Maquina.setter
+    @setMaquina.setter
     def setMaquina(self, maquina):
         self.__maquina = maquina;
 
-    def ConfereSO(self):
-        Sistemas = BuscaSistemas(super().getLogin)
+    def ConfereSO(self, login):
+        Sistemas = BuscaSistemas(login)
         QuantidadeAmostragemValida = 10;
 
         if len(Sistemas) > QuantidadeAmostragemValida:
@@ -49,8 +49,8 @@ class Dispositivo(Usuario):
         else:
             return False;
 
-    def ConfereMaquina(self):
-        Maquinas = BuscaMaquinas(super().getLogin)
+    def ConfereMaquina(self, login):
+        Maquinas = BuscaMaquinas(login)
         QuantidadeAmostragemValida = 10;
 
         if len(Maquinas) > QuantidadeAmostragemValida:

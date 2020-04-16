@@ -17,18 +17,6 @@ class Usuario:
     def getEmail(self):
         return self.__email;
 
-    @setLogin.setter
-    def setLogin(self, login):
-        self.__login = login;
-
-    @setSenha.setter
-    def setSenha(self, senha):
-        self.__senha = senha;
-
-    @setEmail.setter
-    def setEmail(self, email):
-        self.__email = email;
-
     def ConfereLogin(self):
         if ExisteRegistro('user_info', 'login',self.getLogin) == True:
             return True;

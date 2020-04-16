@@ -6,49 +6,32 @@ class Habitualidade:
         self.__dispositivo = dispositivo;
 
     @property
-    def getUsuario(self):
+    def __getUsuario(self):
         return self.__usuario;
 
     @property
-    def getAmbiente(self):
+    def __getAmbiente(self):
         return self.__ambiente;
 
     @property
-    def getDispositivo(self):
+    def __getDispositivo(self):
         return self.__dispositivo;
 
-    @Usuario.setter
-    def setUsuario(self, usuario):
-        self.__usuario = usuario;
-
-    @Ambiente.setter
-    def setAmbiente(self, ambiente):
-        self.__ambiente = ambiente;
-
-    @Dispositivo.setter
-    def setDispositivo(self, dispositivo):
-        self.__dispositivo = dispositivo;
-
-    def ConfereUsuario(self):
+    def __ConfereUsuario(self):
         return True;
-        for parametro in self.getUsuario:
-            if parametro == False:
-                return False;
+        if self.__getUsuario == True:
+            return True;
 
-    def ConfereAmbiente(self):
-        return True;
-        for parametro in self.getAmbiente:
-            if parametro == False:
-                return False;
+    def __ConfereAmbiente(self):
+        if self.__getAmbiente == True:
+            return True;
 
-    def ConfereDispositivo(self):
-        return True;
-        for parametro in self.getDispositivo:
-            if parametro == False:
-                return False;
+    def __ConfereDispositivo(self):
+        if self.__getDispositivo == True:
+            return True;
 
     def __repr__(self):
-        if (self.ConfereAmbiente() == True) and (self.ConfereUsuario() == True) and (self.ConfereDispositivo() == True):
+        if (self.__ConfereAmbiente() == True) and (self.__ConfereUsuario() == True) and (self.__ConfereDispositivo() == True):
             return True;
         else:
             return False;

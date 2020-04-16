@@ -32,9 +32,12 @@ class Ambiente(Dispositivo):
                 return False;
 
     def ConfereQuantidadeTentativas(self):
-        if self.getQuantidadeTentativas < 5:
-            return True;
-        else:
-            return False;
+        try:
+            if self.getQuantidadeTentativas < 5:
+                return True;
+            else:
+                return False;
+        except:
+            print("Erro de execução");
 
 

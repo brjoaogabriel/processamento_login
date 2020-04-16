@@ -15,14 +15,6 @@ class Ambiente():
     def getQuantidadeTentativas(self):
         return self.__quantidadetentativas;
 
-    @setHorario.setter
-    def setHorario(self, horario):
-        self.__horario = horario;
-
-    @setQuantidadeTentativas.setter
-    def setQuantidadeTentatvias(self, quantidadetentativas):
-        self.__quantidadetentativas = quantidadetentativas;
-
     def ConfereHorario(self, maquina):
         QuantidadeAmostragemValida = 10;
         Horarios = BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, maquina);

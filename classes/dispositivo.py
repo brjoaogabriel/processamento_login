@@ -21,18 +21,6 @@ class Dispositivo(Usuario):
     def getMaquina(self):
         return self.__maquina;
 
-    @setSistemaOperacional.setter
-    def setSistemaOperacional(self, sistemaoperacional):
-        self.__sistemaoperacional = sistemaoperacional;
-
-    @setLogin.setter
-    def setLogin(self, login):
-        self.__login = login;
-
-    @setMaquina.setter
-    def setMaquina(self, maquina):
-        self.__maquina = maquina;
-
     def ConfereSO(self, login):
         Sistemas = BuscaSistemas(login)
         QuantidadeAmostragemValida = 10;

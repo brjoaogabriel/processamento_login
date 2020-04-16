@@ -41,4 +41,8 @@ class Ambiente():
         else:
             return False;
 
-
+    def __repr__(self):
+        if (self.ConfereHorario() == True) and (self.ConfereQuantidadeTentativas() == True):
+            return True;
+        else:
+            return False;

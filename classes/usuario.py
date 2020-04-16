@@ -48,7 +48,7 @@ class Usuario:
             return False;
 
     def __repr__(self):
-        if (ConfereSenha() == True) and (ConfereEmail() == True) and (ConfereEmail() == True):
+        if (self.ConfereSenha() == True) and (self.ConfereEmail() == True) and (self.ConfereLogin() == True):
             return True;
         else:
             return False;

@@ -58,3 +58,9 @@ class Dispositivo(Usuario):
                 return True;
             else:
                 return False;
+
+    def __repr__(self):
+        if (self.ConfereSO() == True) and (self.ConfereLogin() == True) and (self.ConfereMaquina() == True):
+            return True;
+        else:
+            return False;

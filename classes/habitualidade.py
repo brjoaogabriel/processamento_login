@@ -46,3 +46,9 @@ class Habitualidade:
         for parametro in self.getDispositivo:
             if parametro == False:
                 return False;
+
+    def __repr__(self):
+        if (self.ConfereAmbiente() == True) and (self.ConfereUsuario() == True) and (self.ConfereDispositivo() == True):
+            return True;
+        else:
+            return False;

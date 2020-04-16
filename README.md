@@ -15,13 +15,13 @@ Who?
   Instagram:  @devdragao
   
 Quanto?
-  Aproximadamente 5 horas de desenvolvimento fracionadas em 3 dias
+  Aproximadamente 8 horas de desenvolvimento fracionadas em 3 dias
   
 Como?
   - Data        Carga Horária   Objetivo  
-  - 04/16/2020  1                Definição de planejamento estratégico para desenvolvimento da aplicação
+  - 04/16/2020  2                Definição de planejamento estratégico para desenvolvimento da aplicação
   - 05/16/2020  2                Desenvolvimento das classes, atributos, métodos, comportamentos e funções
-  - 06/16/2020  2                Desenvolvimento das funções restantes, validação de comportamentos e segurança
+  - 06/16/2020  3                Desenvolvimento das funções restantes, validação de comportamentos e segurança
   - 06/16/2020  0,5              Elaboração do feedback do projeto
   - 06/16/2020  0,5              Finalização do projeto
   

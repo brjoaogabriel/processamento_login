@@ -1,8 +1,9 @@
-class Ambiente:
+class Ambiente(Dispositivo):
 
-    def __init__(self, horario=datetime.datetime.now().time(), quantidadetentativas=0):
-        self.__horario = horario;
-        self.__quantidadetentatvias = quantidadetentativas;
+    def __init__(self):
+        super().__init__();
+        self.__horario = {'hora': datetime.datetime.now().hour, 'minuto': datetime.datetime.now().minute};
+        self.__quantidadetentatvias = ContaLogs(super().getMaquina);
 
     @property
     def getHorario(self):
@@ -23,12 +24,17 @@ class Ambiente:
     def ConfereHorario(self, maquina):
         QuantidadeAmostragemValida = 10;
         Horarios = BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, Dispositivo.getMaquina);
+
         if len(Horarios > QuantidadeAmostragemValida):
-            if (self.getHorario >= min(Horarios)) and (self.getHorario <= max(Horarios)):
+            if EstaEntre(self.getHorario, min(Horarios), max(Horarios)) == True:
                 return True;
             else:
                 return False;
 
     def ConfereQuantidadeTentativas(self):
+        if self.getQuantidadeTentativas < 5:
+            return True;
+        else:
+            return False;
 
 

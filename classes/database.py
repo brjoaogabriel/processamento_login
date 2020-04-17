@@ -133,5 +133,3 @@ class Database(pymysql.connections.Connection, pymysql.cursors.Cursor):
 
         self.DesconectarCursor();
         self.DesconectarBase()
-
-        #Horarios = db.BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, maquina);

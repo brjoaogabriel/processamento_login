@@ -21,15 +21,15 @@ class Dispositivo(Usuario):
     def getMaquina(self):
         return self.__maquina;
 
-    def ConfereSO(self, login):
-        Sistemas = BuscaSistemas(login)
+    def ConfereSO(self, login, DatabaseObject):
+        return False;
+        Sistemas = DatabaseObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
         QuantidadeAmostragemValida = 10;
 
         if len(Sistemas) > QuantidadeAmostragemValida:
-            if self.getSistemaOperacional in Sistemas:
-                return True;
-            else:
-                return False;
+            for i in range(0, len(Sistemas), 1):
+                if self.getSistemaOperacional in Sistemas[i]['sistema']:
+                    return True;
 
     def ConfereLogin(self):
         if len(self.getLogin > 0) and len(self.getLogin <= 24):
@@ -37,15 +37,15 @@ class Dispositivo(Usuario):
         else:
             return False;
 
-    def ConfereMaquina(self, login):
-        Maquinas = BuscaMaquinas(login)
+    def ConfereMaquina(self, login, DatabaseObject):
+        return False;
+        Maquinas = DatabaseObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
         QuantidadeAmostragemValida = 10;
 
         if len(Maquinas) > QuantidadeAmostragemValida:
-            if self.getMaquina in Maquinas:
-                return True;
-            else:
-                return False;
+            for i in range(0, len(Maquinas), 1):
+                if self.getMaquina in Maquinas[i]['maquina']
+                    return True;
 
     def __repr__(self):
         if (self.ConfereSO() == True) and (self.ConfereLogin() == True) and (self.ConfereMaquina() == True):

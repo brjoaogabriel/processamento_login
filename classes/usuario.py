@@ -17,20 +17,20 @@ class Usuario:
     def getEmail(self):
         return self.__email;
 
-    def ConfereLogin(self):
-        if ExisteRegistro('user_info', 'login',self.getLogin) == True:
+    def ConfereLogin(self, DatabaseObject):
+        if DatabaseObject.BuscaRegistro(f"'{self.getLogin}'", "'user_info'", "login", "Existencia", True) == True:
             return True;
         else:
             return False;
 
-    def ConfereSenha(self):
-        if ExisteRegistro('user_info', 'senha', self.getSenha) == True:
+    def ConfereSenha(self, DatabaseObject):
+        if DatabaseObject.BuscaRegistro(f"'{self.getSenha}'", "'user_info'", "senha", "Existencia", True) == True:
             return True;
         else:
             return False;
 
-    def ConfereEmail(self):
-        if ExisteRegistro('user_info', 'email', self.getEmail) == True:
+    def ConfereEmail(self, DatabaseObject):
+        if DatabaseObject.BuscaRegistro(f"'{self.getEmail}'", "'user_info'", "email", "Existencia", True) == True:
             return True;
         else:
             return False;

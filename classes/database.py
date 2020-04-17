@@ -101,16 +101,50 @@ class Database(pymysql.cursors):
         );
 
     def DesconectarBase(self):
-        self.setConexao.close
+        self.setConexao.close;
+        self.setConexao = None;
 
-"""        
+    def ConectarCursor(self):
         self.setCursor = self.getConexao.cursor
-        
-        
-        
+
+    def DesconectarCursor(self):
         self.setCursor.close();
         self.setCursor = None;
-        
 
-        self.setConexao.close();
-        self.setConexao = None;"""
+    def ExisteRegistro(self, ParametroBusca, NomeTabela, NomeCampo, Exato=True):
+        self.ConectarBase();
+        self.ConectarCursor();
+
+        if Exato == True:
+            self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} = {ParametroBusca}");
+        else:
+            self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} LIKE '%{ParametroBusca}%'");
+
+
+
+        self.DesconectarCursor();
+        self.DesconectarBase()
+
+    def BuscaRegistro(self, ParametroBusca, NomeTabela, NomeCampo, Retorna="Registros", Exato=True):
+        self.ConectarBase();
+        self.ConectarCursor();
+
+        if Exato == True:
+                self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} = {ParametroBusca}");
+            else:
+                self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} LIKE '%{ParametroBusca}%'");
+
+        if Retorna == "Registros":
+            return self.getCursor.fetchall();
+
+        elif Retorna == "Existencia":
+            if len(self.getCursor.fetchall()) > 0:
+                return True;
+            else:
+                return False;
+
+        elif Retorna == "Quantidade":
+            return len(self.getCursor.fetchall());
+
+        self.DesconectarCursor();
+        self.DesconectarBase()

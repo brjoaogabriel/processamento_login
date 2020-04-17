@@ -3,9 +3,9 @@ import platfrom
 
 class Ambiente():
 
-    def __init__(self):
+    def __init__(self, DatabaseObject):
         self.__horario = {'hora': datetime.datetime.now().hour, 'minuto': datetime.datetime.now().minute};
-        self.__quantidadetentativas = ContaLogs(platform.node);
+        self.__quantidadetentativas = DatabaseObject.BuscaRegistro(f"'{maquina}'", 'log_tentativas', 'maquina', "Quantidade", True);
 
     @property
     def getHorario(self):
@@ -15,9 +15,9 @@ class Ambiente():
     def getQuantidadeTentativas(self):
         return self.__quantidadetentativas;
 
-    def ConfereHorario(self, maquina):
+    def ConfereHorario(self, maquina, DatabaseObject):
         QuantidadeAmostragemValida = 10;
-        Horarios = BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, maquina);
+        Horarios = DatabaseObject.BuscaRegistro(f"'{maquina}'", 'log_tentativas', 'maquina', "Registros", True);
 
         if len(Horarios) > QuantidadeAmostragemValida:
             if EstaEntre(self.getHorario, min(Horarios), max(Horarios)) == True:

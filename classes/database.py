@@ -1,7 +1,7 @@
 import pymysql
 import pymysql.cursors
 
-class Database(pymysql.cursors):
+class Database(pymysql.connections.Connection, pymysql.cursors.Cursor):
 
     def __init__(self, porta, host, user, password, database, enconding="utf8mb4"):
         self.__porta = porta;
@@ -50,44 +50,37 @@ class Database(pymysql.cursors):
     def getCursor(self):
         return self.__cursor;
 
-    @setPorta.setter
+    @getPorta.setter
     def setPorta(self, porta):
         self.__porta = porta;
 
-    @setHost.setter
+    @getHost.setter
     def setHost(self, host):
         self.__host = host;
 
-    @setUser.setter
+    @getUser.setter
     def setUser(self, user):
         self.__user = user;
 
-    @setPassword.setter
+    @getPassword.setter
     def setPassword(self, password):
         self.__password = password;
 
-    @setDatabase.setter
+    @getDatabase.setter
     def setDatabase(self, database):
         self.__database = database;
 
-    @setEnconding.setter
+    @getEnconding.setter
     def setEnconding(self, enconding):
         self.__enconding = enconding;
 
-    @setConexao.setter
+    @getConexao.setter
     def setConexao(self, conexao):
         self.__conexao = conexao;
 
-    @setCursor.setter
+    @getCursor.setter
     def setCursor(self, cursor):
         self.__cursor = cursor;
-
-    #Todos esses podem ser iguais e sua funcionalidade pode ser dividida dentro do python
-    def ExisteRegistro(self, NomeTabela, Campo, Parametro):
-
-    def BuscaRegistro(self, NomeTabela, Campo, Parametro):
-
-    def ContaRegistro(self, NomeTabela, Campo, Parametro):
 
     def ConectarBase(self):
         self.setConexao = pymysql.connect(
@@ -105,46 +98,40 @@ class Database(pymysql.cursors):
         self.setConexao = None;
 
     def ConectarCursor(self):
-        self.setCursor = self.getConexao.cursor
+        self.setCursor = self.getConexao.cursor()
 
     def DesconectarCursor(self):
-        self.setCursor.close();
+        self.getCursor.close;
         self.setCursor = None;
-
-    def ExisteRegistro(self, ParametroBusca, NomeTabela, NomeCampo, Exato=True):
-        self.ConectarBase();
-        self.ConectarCursor();
-
-        if Exato == True:
-            self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} = {ParametroBusca}");
-        else:
-            self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} LIKE '%{ParametroBusca}%'");
-
-
-
-        self.DesconectarCursor();
-        self.DesconectarBase()
 
     def BuscaRegistro(self, ParametroBusca, NomeTabela, NomeCampo, Retorna="Registros", Exato=True):
         self.ConectarBase();
         self.ConectarCursor();
 
         if Exato == True:
-                self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} = {ParametroBusca}");
-            else:
-                self.getCursor.execute(f"SELECT * FROM {NomeTabela} WHERE {NomeCampo} LIKE '%{ParametroBusca}%'");
+            sql = f"""SELECT * FROM {NomeTabela} WHERE {NomeCampo} = '{ParametroBusca}'""";
+            print(sql);
+            self.getCursor.execute(sql);
+            sql = None;
+        else:
+            sql = f"""SELECT * FROM {NomeTabela} WHERE {NomeCampo} LIKE '%{ParametroBusca}%'""";
+            print(sql);
+            self.getCursor.execute(sql);
+            sql = None;
 
         if Retorna == "Registros":
             return self.getCursor.fetchall();
 
         elif Retorna == "Existencia":
-            if len(self.getCursor.fetchall()) > 0:
+            if self.getCursor.rowcount > 0:
                 return True;
             else:
                 return False;
 
         elif Retorna == "Quantidade":
-            return len(self.getCursor.fetchall());
+            return self.getCursor.rowcount;
 
         self.DesconectarCursor();
         self.DesconectarBase()
+
+        #Horarios = db.BuscarLogs(datetime.datetime.now().hour, datetime.datetime.now().minute, maquina);

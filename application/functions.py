@@ -3,5 +3,3 @@ def EstaEntre(HoraReferida, Horas):
         return True;
     else:
         return False;
-
-def ConfereHorario

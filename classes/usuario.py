@@ -21,26 +21,26 @@ class Usuario(VariaveisLogin):
         return self.__email;
 
     def ConfereLogin(self):
-        if super().getDbObject.BuscaRegistro(f"'{self.getLogin}'", "'user_info'", "login", "Existencia", True) == True:
+        if super().getDbObject.BuscaRegistro(f'{self.getLogin}', 'user_info', 'desc_login', "Existencia", True) == True:
             return True;
         else:
             return False;
 
     def ConfereSenha(self):
-        if super().getDbObject.BuscaRegistro(f"'{self.getSenha}'", "'user_info'", "senha", "Existencia", True) == True:
+        if super().getDbObject.BuscaRegistro(f'{self.getSenha}', 'user_info', 'desc_senha', "Existencia", True) == True:
             return True;
         else:
             return False;
 
     def ConfereEmail(self):
-        if super().getDbObject.BuscaRegistro(f"'{self.getEmail}'", "'user_info'", "email", "Existencia", True) == True:
+        if super().getDbObject.BuscaRegistro(f'{self.getEmail}', 'user_info', 'desc_email', "Existencia", True) == True:
             return True;
         else:
             return False;
 
     def ConfereEntrada(self):
-        main.DatabaseObject.BuscaRegistro(f"'{self.getLogin}'", 'user_info', 'login', "Registros", True);
-        SenhaCorreta = main.DatabaseObject.getCursor.fetchall()[0]['senha'];
+        super().getDbObject.getCursor.execute(f"select * from user_info where desc_login = '{self.getLogin}'")
+        SenhaCorreta = super().getDbObject.getCursor.fetchall()[0]['desc_senha'];
         if len(SenhaCorreta) > 0:
             if self.getSenha == SenhaCorreta:
                 return True;
@@ -52,7 +52,24 @@ class Usuario(VariaveisLogin):
             print("Senha incorreta.");
 
     def __repr__(self):
-        if (self.ConfereSenha() == True) and (self.ConfereEmail() == True) and (self.ConfereLogin() == True) and (self.ConfereEntrada() == True):
-            return True;
+        Parametro = {'nome':[], 'resultado':[]};
+
+        Parametro['nome'].append('confere_senha');
+        Parametro['resultado'].append(self.ConfereSenha());
+
+        Parametro['nome'].append('confere_email');
+        Parametro['resultado'].append(self.ConfereEmail());
+
+        Parametro['nome'].append('confere_login');
+        Parametro['resultado'].append(self.ConfereLogin());
+
+        Parametro['nome'].append('confere_entrada');
+        Parametro['resultado'].append(self.ConfereEntrada());
+
+        for i in range(0, len(Parametro['nome']), 1):
+            print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
+
+        if False in Parametro['resultado']:
+            return "Usuario.            False\n";
         else:
-            return False;
+            return "Usuario.            True\n";

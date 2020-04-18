@@ -31,7 +31,14 @@ class Habitualidade:
             return True;
 
     def __repr__(self):
-        if (self.__ConfereAmbiente() == True) and (self.__ConfereUsuario() == True) and (self.__ConfereDispositivo() == True):
-            return True;
+        Parametro = [];
+
+        Parametro.append(self.__ConfereAmbiente() == True);
+        Parametro.append(self.__ConfereUsuario() == True);
+        Parametro.append(self.__ConfereDispositivo() == True);
+
+        if False in Parametro:
+            return "Não aprovado."
+
         else:
-            return False;
+            return "Aprovado."

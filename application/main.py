@@ -8,8 +8,16 @@ from classes.habitualidade import *;
 
 thisDatabaseObject = Database(3306, 'localhost', 'root', '', 'test');
 
-thisDispositivo = Dispositivo(thisDatabaseObject);
 thisUsuario = Usuario('joaogabriel', 'itau', 'contato_joaogabriel@outlook.com', thisDatabaseObject);
+print(thisUsuario);
+
+thisDispositivo = Dispositivo(thisDatabaseObject, thisUsuario.getLogin);
+print(thisDispositivo);
+
 thisAmbiente = Ambiente(thisDatabaseObject, thisDispositivo.getMaquina);
+print(thisAmbiente);
+
+thisResposta = Habitualidade(thisUsuario, thisAmbiente, thisDispositivo);
+print(thisResposta);
 
 DatabaseObject = None;

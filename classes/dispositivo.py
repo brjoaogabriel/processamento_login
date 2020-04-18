@@ -4,10 +4,11 @@ from classes.VariaveisLogin import VariaveisLogin
 
 class Dispositivo(VariaveisLogin):
 
-    def __init__(self, DatabaseObject):
+    def __init__(self, DatabaseObject, login):
         super().__init__(DatabaseObject)
         self.__sistemaoperacional = platform.system();
         self.__login = os.getlogin();
+        self.__secondlogin = login;
         self.__maquina = platform.node();
 
     @property
@@ -19,12 +20,16 @@ class Dispositivo(VariaveisLogin):
         return self.__login;
 
     @property
+    def getSecondLogin(self):
+        return self.__secondlogin;
+
+    @property
     def getMaquina(self):
         return self.__maquina;
 
-    def ConfereSO(self, login, DatabaseObject):
+    def ConfereSO(self):
         return False;
-        Sistemas = super().getDbObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
+        Sistemas = super().getDbObject.BuscaRegistro(f"'{self.getSecondLogin}", 'log_tentativas', 'login', "Registros", True);
         QuantidadeAmostragemValida = 10;
 
         if len(Sistemas) > QuantidadeAmostragemValida:
@@ -33,14 +38,14 @@ class Dispositivo(VariaveisLogin):
                     return True;
 
     def ConfereLogin(self):
-        if len(self.getLogin > 0) and len(self.getLogin <= 24):
+        if len(self.getLogin) > 0 and len(self.getLogin) <= 24:
             return True;
         else:
             return False;
 
-    def ConfereMaquina(self, login, DatabaseObject):
+    def ConfereMaquina(self):
         return False;
-        Maquinas = super().getDbObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
+        Maquinas = super().getDbObject.BuscaRegistro(f"'{self.getSecondLogin}'", 'log_tentativas', 'login', "Registros", True);
         QuantidadeAmostragemValida = 10;
 
         if len(Maquinas) > QuantidadeAmostragemValida:
@@ -49,7 +54,25 @@ class Dispositivo(VariaveisLogin):
                     return True;
 
     def __repr__(self):
-        if (self.ConfereSO() == True) and (self.ConfereLogin() == True) and (self.ConfereMaquina() == True):
-            return True;
+        Parametro = {'nome':[], 'resultado':[]};
+
+        Parametro['nome'].append('confere_sistema_operacional');
+        Parametro['resultado'].append(self.ConfereSO());
+
+        Parametro['nome'].append('confere_login');
+        Parametro['resultado'].append(self.ConfereLogin());
+
+        Parametro['nome'].append('confere_maquina');
+        Parametro['resultado'].append(self.ConfereMaquina());
+
+        for i in range(0, len(Parametro['nome']), 1):
+            print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
+
+        if False in Parametro['resultado']:
+            return "Dispositivo.        False\n";
+
         else:
-            return False;
+            return "Dispositivo.        True\n";
+
+
+

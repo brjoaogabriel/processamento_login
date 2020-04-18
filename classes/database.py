@@ -110,12 +110,10 @@ class Database(pymysql.connections.Connection, pymysql.cursors.Cursor):
 
         if Exato == True:
             sql = f"""SELECT * FROM {NomeTabela} WHERE {NomeCampo} = '{ParametroBusca}'""";
-            print(sql);
             self.getCursor.execute(sql);
             sql = None;
         else:
             sql = f"""SELECT * FROM {NomeTabela} WHERE {NomeCampo} LIKE '%{ParametroBusca}%'""";
-            print(sql);
             self.getCursor.execute(sql);
             sql = None;
 
@@ -130,6 +128,8 @@ class Database(pymysql.connections.Connection, pymysql.cursors.Cursor):
 
         elif Retorna == "Quantidade":
             return self.getCursor.rowcount;
+
+        print(sql);
 
         self.DesconectarCursor();
         self.DesconectarBase()

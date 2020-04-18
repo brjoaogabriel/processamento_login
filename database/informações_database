@@ -1,0 +1,26 @@
+CLIENTES CADASTRADOS!
+    user_info:
+    login, senha, email
+
+    create table user_info (
+        desc_login		varchar(24) NOT NULL PRIMARY KEY,
+        desc_senha		varchar(24) NOT NULL,
+        desc_email		varchar(60) NOT NULL,
+        data_criacao	datetime
+        );
+
+
+
+TENTATIVAS DE ENTRADAS!
+    log_tentativas:
+    login, sistema_operacional, maquina, horario, resultado
+
+    create table log_tentativas (
+        id_log			int(12) not null auto_increment primary key,
+        login			varchar(24) not null,
+        sistema_op		varchar(24) not null,
+        maquina			varchar(24) not null,
+        horario			time not null,
+        resultado		int(1),
+        constraint fk_login foreign key (login) references user_info(desc_login)
+        );

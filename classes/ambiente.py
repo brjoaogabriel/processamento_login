@@ -1,11 +1,15 @@
-import datetime
-import platfrom
+import datetime;
+import platform;
+from classes.VariaveisLogin import VariaveisLogin
+from classes.dispositivo import Dispositivo
 
-class Ambiente():
+class Ambiente(VariaveisLogin):
 
-    def __init__(self, DatabaseObject):
+    def __init__(self, DatabaseObject, maquina):
+        super().__init__(DatabaseObject);
         self.__horario = datetime.datetime.now();
-        self.__quantidadetentativas = DatabaseObject.BuscaRegistro(f"'{maquina}'", 'log_tentativas', 'maquina', "Quantidade", True);
+        self.__quantidadetentativas = super().getDbObject.BuscaRegistro(f"'{maquina}'", 'log_tentativas', 'maquina', "Quantidade", True);
+
     @property
     def getHorario(self):
         return self.__horario;
@@ -14,9 +18,9 @@ class Ambiente():
     def getQuantidadeTentativas(self):
         return self.__quantidadetentativas;
 
-    def ConfereHorario(self, maquina, DatabaseObject):
+    def ConfereHorario(self, maquina):
         QuantidadeAmostragemValida = 10;
-        Horarios = DatabaseObject.BuscaRegistro(f"'{maquina}'", 'log_tentativas', 'maquina', "Registros", True);
+        Horarios = super().getDbObject.BuscaRegistro(f"'{Dispositivo.getMaquina}'", 'log_tentativas', 'maquina', "Registros", True);
 
         if len(Horarios) > QuantidadeAmostragemValida:
             if EstaEntre(self.getHorario, Horarios) == True:

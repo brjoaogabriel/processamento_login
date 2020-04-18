@@ -1,10 +1,11 @@
 import platform
 import os
+from classes.VariaveisLogin import VariaveisLogin
 
-class Dispositivo(Usuario):
+class Dispositivo(VariaveisLogin):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, DatabaseObject):
+        super().__init__(DatabaseObject)
         self.__sistemaoperacional = platform.system();
         self.__login = os.getlogin();
         self.__maquina = platform.node();
@@ -23,7 +24,7 @@ class Dispositivo(Usuario):
 
     def ConfereSO(self, login, DatabaseObject):
         return False;
-        Sistemas = DatabaseObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
+        Sistemas = super().getDbObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
         QuantidadeAmostragemValida = 10;
 
         if len(Sistemas) > QuantidadeAmostragemValida:
@@ -39,12 +40,12 @@ class Dispositivo(Usuario):
 
     def ConfereMaquina(self, login, DatabaseObject):
         return False;
-        Maquinas = DatabaseObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
+        Maquinas = super().getDbObject.BuscaRegistro(f"'{login}", 'log_tentativas', 'login', "Registros", True);
         QuantidadeAmostragemValida = 10;
 
         if len(Maquinas) > QuantidadeAmostragemValida:
             for i in range(0, len(Maquinas), 1):
-                if self.getMaquina in Maquinas[i]['maquina']
+                if self.getMaquina in Maquinas[i]['maquina']:
                     return True;
 
     def __repr__(self):

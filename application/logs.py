@@ -1,7 +1,7 @@
 from classes.database import Database
 import datetime
 
-DatabaseObject = Database(3306, 'localhost', 'root', '', 'processamento_login');
+DatabaseObject = Database(3306, 'localhost', 'root', '', 'test');
 
 DatabaseObject.ConectarBase();
 

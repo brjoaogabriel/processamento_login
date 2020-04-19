@@ -56,20 +56,15 @@ class Usuario(VariaveisLogin):
         Parametro['nome'].append('confere_entrada');
         Parametro['resultado'].append(self.ConfereEntrada());
 
-        for i in range(0, len(Parametro['nome']), 1):
-            print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
-
         self.setValidado = Parametro;
 
         Parametro = None;
 
         return False not in self.getValidado['resultado'];
 
-
-
-
     def __repr__(self):
         self.Validar_Parametro();
+        super().printar_log(self.getValidado);
         if False not in self.getValidado['resultado']:
             return 'Aprovado\n';
         else:

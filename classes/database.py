@@ -148,6 +148,17 @@ class Database(pymysql.connections.Connection, pymysql.cursors.Cursor):
 
         return Validado;
 
+    def Gerar_Log(self, login, sistema_op, maquina, horario, resultado):
+        self.ConectarBase();
+        self.ConectarCursor();
+        self.getConexao.begin();
 
+        campos = 'login, sistema_op, maquina, horario, resultado';
+        dados = f"'{login}', '{sistema_op}', '{maquina}', '{horario}', '{resultado}'";
+        sql = f"INSERT INTO log_tentativas ({campos}) values ({dados})";
+        self.getCursor.execute(sql);
 
-
+        self.getConexao.commit();
+        self.DesconectarCursor()
+        self.DesconectarBase()
+        print(f"{True} - Gerando log...")

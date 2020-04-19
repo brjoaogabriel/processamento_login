@@ -27,11 +27,18 @@ def Validar_Usuario():
     print(thisAmbiente);
 
     thisResposta = Habitualidade(thisUsuario.Validar_Parametro(), thisAmbiente.Validar_Parametro(), thisDispositivo.Validar_Parametro());
-    thisResposta.Validar_Parametro();
+    Resultado = thisResposta.Validar_Parametro();
     print(thisResposta);
 
-    DatabaseObject = None;
+    if Resultado == True:
+        thisDatabaseObject.Gerar_Log(Login, thisDispositivo.getSistemaOperacional, thisDispositivo.getMaquina, thisAmbiente.getHorario, 1);
+    else:
+        thisDatabaseObject.Gerar_Log(Login, thisDispositivo.getSistemaOperacional, thisDispositivo.getMaquina, thisAmbiente.getHorario, 0);
 
-    return this thisResposta.Validar_Parametro();
+    thisDatabaseObject = None;
+
+    print("Finalizando execução da validação do usuário...");
+
+    return Resultado;
 
 Validar_Usuario();

@@ -7,7 +7,7 @@ class Ambiente(VariaveisLogin):
 
     def __init__(self, DatabaseObject, maquina):
         super().__init__(DatabaseObject);
-        self.__horario = datetime.datetime.now();
+        self.__horario = datetime.datetime.now().time();
         self.__maquina = maquina;
         self.__quantidadetentativas = super().getDbObject.BuscaRegistro(f"{maquina}", 'log_tentativas', 'maquina', "Quantidade", True);
         self.__validado = False;

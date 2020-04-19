@@ -6,7 +6,3 @@ class VariaveisLogin():
     @property
     def getDbObject(self):
         return self.__dbobject;
-
-    @getDbObject.setter
-    def setDbObject(self, DatabaseObject):
-        self.__dbobject = DatabaseObject;

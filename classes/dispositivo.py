@@ -10,6 +10,7 @@ class Dispositivo(VariaveisLogin):
         self.__login = os.getlogin();
         self.__secondlogin = login;
         self.__maquina = platform.node();
+        self.__validado = False;
 
     @property
     def getSistemaOperacional(self):
@@ -26,6 +27,14 @@ class Dispositivo(VariaveisLogin):
     @property
     def getMaquina(self):
         return self.__maquina;
+
+    @property
+    def getValidado(self):
+        return self.__validado;
+
+    @getValidado.setter
+    def setValidado(self, validacoes):
+        self.__validado = validacoes;
 
     def ConfereSO(self):
         super().getDbObject.BuscaRegistro(f"{self.getSecondLogin}", 'log_tentativas', 'login', "Registros", True);
@@ -55,14 +64,14 @@ class Dispositivo(VariaveisLogin):
         else:
             return True;
 
-    def __repr__(self):
+    def Validar_Parametro(self):
         Parametro = {'nome':[], 'resultado':[]};
-
-        Parametro['nome'].append('confere_sistema_operacional');
-        Parametro['resultado'].append(self.ConfereSO());
 
         Parametro['nome'].append('confere_login');
         Parametro['resultado'].append(self.ConfereLogin());
+
+        Parametro['nome'].append('confere_sistema_operacional');
+        Parametro['resultado'].append(self.ConfereSO());
 
         Parametro['nome'].append('confere_maquina');
         Parametro['resultado'].append(self.ConfereMaquina());
@@ -70,11 +79,18 @@ class Dispositivo(VariaveisLogin):
         for i in range(0, len(Parametro['nome']), 1):
             print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
 
-        if "False" in Parametro['resultado']:
-            return "Dispositivo.        False\n";
+        self.setValidado = Parametro;
 
+        Parametro = None;
+
+        return False not in self.getValidado['resultado'];
+
+    def __repr__(self):
+        self.Validar_Parametro();
+        if False not in self.getValidado['resultado']:
+            return 'Aprovado\n';
         else:
-            return "Dispositivo.        True\n";
+            return 'Não aprovado\n';
 
 
 

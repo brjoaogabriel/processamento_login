@@ -7,6 +7,7 @@ class Usuario(VariaveisLogin):
         self.__login = login;
         self.__senha = senha;
         self.__email = email;
+        self.__validado = False;
 
     @property
     def getLogin(self):
@@ -20,28 +21,27 @@ class Usuario(VariaveisLogin):
     def getEmail(self):
         return self.__email;
 
+    @property
+    def getValidado(self):
+        return self.__validado;
+
+    @getValidado.setter
+    def setValidado(self, validacoes):
+        self.__validado = validacoes;
+
     def ConfereLogin(self):
-        if super().getDbObject.BuscaRegistro(f'{self.getLogin}', 'user_info', 'desc_login', "Existencia", True) == True:
-            return True;
-        else:
-            return False;
+        return super().getDbObject.BuscaRegistro(f'{self.getLogin}', 'user_info', 'desc_login', "Existencia", True);
 
     def ConfereSenha(self):
-        if super().getDbObject.BuscaRegistro(f'{self.getSenha}', 'user_info', 'desc_senha', "Existencia", True) == True:
-            return True;
-        else:
-            return False;
+        return super().getDbObject.BuscaRegistro(f'{self.getSenha}', 'user_info', 'desc_senha', "Existencia", True);
 
     def ConfereEmail(self):
-        if super().getDbObject.BuscaRegistro(f'{self.getEmail}', 'user_info', 'desc_email', "Existencia", True) == True:
-            return True;
-        else:
-            return False;
+        return super().getDbObject.BuscaRegistro(f'{self.getEmail}', 'user_info', 'desc_email', "Existencia", True);
 
     def ConfereEntrada(self):
         return super().getDbObject.Valida_Senha(self.getLogin, self.getSenha);
 
-    def __repr__(self):
+    def Validar_Parametro(self):
         Parametro = {'nome':[], 'resultado':[]};
 
         Parametro['nome'].append('confere_senha');
@@ -59,7 +59,18 @@ class Usuario(VariaveisLogin):
         for i in range(0, len(Parametro['nome']), 1):
             print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
 
-        if "False" in Parametro['resultado']:
-            return "Usuario.            False\n";
+        self.setValidado = Parametro;
+
+        Parametro = None;
+
+        return False not in self.getValidado['resultado'];
+
+
+
+
+    def __repr__(self):
+        self.Validar_Parametro();
+        if False not in self.getValidado['resultado']:
+            return 'Aprovado\n';
         else:
-            return "Usuario.            True\n";
+            return 'Não aprovado\n';

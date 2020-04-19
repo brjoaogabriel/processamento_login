@@ -133,16 +133,21 @@ class Database(pymysql.connections.Connection, pymysql.cursors.Cursor):
         self.DesconectarBase()
 
     def Valida_Senha(self, login, senha):
+        Validado: bool;
+
         self.ConectarBase();
         self.ConectarCursor();
 
         sql = f"SELECT desc_login, desc_senha FROM user_info WHERE desc_login = '{login}' and desc_senha = '{senha}' LIMIT 1"
         self.getCursor.execute(sql);
 
-        return self.getCursor.rowcount > 0;
-        #return self.getCursor.fetchall();
+        Validado = self.getCursor.rowcount > 0;
 
         self.DesconectarCursor()
         self.DesconectarBase()
+
+        return Validado;
+
+
 
 

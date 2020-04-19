@@ -14,15 +14,19 @@ print();
 thisDatabaseObject = Database(3306, 'localhost', 'root', '', 'test');
 
 thisUsuario = Usuario(Login, Senha, Email, thisDatabaseObject);
+thisUsuario.getValidado;
 print(thisUsuario);
 
 thisDispositivo = Dispositivo(thisDatabaseObject, thisUsuario.getLogin);
+thisDispositivo.getValidado;
 print(thisDispositivo);
 
 thisAmbiente = Ambiente(thisDatabaseObject, thisDispositivo.getMaquina);
+thisAmbiente.getValidado;
 print(thisAmbiente);
 
-thisResposta = Habitualidade(thisUsuario, thisAmbiente, thisDispositivo);
+thisResposta = Habitualidade(thisUsuario.Validar_Parametro(), thisAmbiente.Validar_Parametro(), thisDispositivo.Validar_Parametro());
+thisResposta.Validar_Parametro();
 print(thisResposta);
 
 DatabaseObject = None;

@@ -10,6 +10,7 @@ class Ambiente(VariaveisLogin):
         self.__horario = datetime.datetime.now();
         self.__maquina = maquina;
         self.__quantidadetentativas = super().getDbObject.BuscaRegistro(f"{maquina}", 'log_tentativas', 'maquina', "Quantidade", True);
+        self.__validado = False;
 
     @property
     def getHorario(self):
@@ -22,6 +23,14 @@ class Ambiente(VariaveisLogin):
     @property
     def getQuantidadeTentativas(self):
         return self.__quantidadetentativas;
+
+    @property
+    def getValidado(self):
+        return self.__validado;
+
+    @getValidado.setter
+    def setValidado(self, validacoes):
+        self.__validado = validacoes;
 
     def ConfereHorario(self):
         QuantidadeAmostragemValida = 10;
@@ -42,7 +51,7 @@ class Ambiente(VariaveisLogin):
         else:
             return False;
 
-    def __repr__(self):
+    def Validar_Parametro(self):
         Parametro = {'nome':[], 'resultado':[]};
 
         Parametro['nome'].append('confere_horario');
@@ -54,7 +63,15 @@ class Ambiente(VariaveisLogin):
         for i in range(0, len(Parametro['nome']), 1):
             print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
 
-        if "False" in Parametro['resultado']:
-            return "Ambiente.           False\n";
+        self.setValidado = Parametro;
+
+        Parametro = None;
+
+        return False not in self.getValidado['resultado'];
+
+    def __repr__(self):
+        self.Validar_Parametro();
+        if False not in self.getValidado['resultado']:
+            return 'Aprovado\n';
         else:
-            return "Ambiente.           True\n";
+            return 'Não aprovado\n';

@@ -6,9 +6,14 @@ from classes.dispositivo import *;
 from classes.usuario import *;
 from classes.habitualidade import *;
 
+Login = str(input("Login:   "));
+Senha = str(input("Senha:   "));
+Email = str(input("Email:   "));
+print();
+
 thisDatabaseObject = Database(3306, 'localhost', 'root', '', 'test');
 
-thisUsuario = Usuario('joaogabriel', 'itau', 'contato_joaogabriel@outlook.com', thisDatabaseObject);
+thisUsuario = Usuario(Login, Senha, Email, thisDatabaseObject);
 print(thisUsuario);
 
 thisDispositivo = Dispositivo(thisDatabaseObject, thisUsuario.getLogin);

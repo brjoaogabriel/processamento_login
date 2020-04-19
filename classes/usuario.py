@@ -39,17 +39,7 @@ class Usuario(VariaveisLogin):
             return False;
 
     def ConfereEntrada(self):
-        super().getDbObject.getCursor.execute(f"select * from user_info where desc_login = '{self.getLogin}'")
-        SenhaCorreta = super().getDbObject.getCursor.fetchall()[0]['desc_senha'];
-        if len(SenhaCorreta) > 0:
-            if self.getSenha == SenhaCorreta:
-                return True;
-
-            else:
-                return False;
-
-        else:
-            print("Senha incorreta.");
+        return super().getDbObject.Valida_Senha(self.getLogin, self.getSenha);
 
     def __repr__(self):
         Parametro = {'nome':[], 'resultado':[]};
@@ -69,7 +59,7 @@ class Usuario(VariaveisLogin):
         for i in range(0, len(Parametro['nome']), 1):
             print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
 
-        if False in Parametro['resultado']:
+        if "False" in Parametro['resultado']:
             return "Usuario.            False\n";
         else:
             return "Usuario.            True\n";

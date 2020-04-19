@@ -54,7 +54,7 @@ class Ambiente(VariaveisLogin):
         for i in range(0, len(Parametro['nome']), 1):
             print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
 
-        if False in Parametro['resultado']:
+        if "False" in Parametro['resultado']:
             return "Ambiente.           False\n";
         else:
             return "Ambiente.           True\n";

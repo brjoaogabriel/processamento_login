@@ -28,14 +28,15 @@ class Dispositivo(VariaveisLogin):
         return self.__maquina;
 
     def ConfereSO(self):
-        return False;
-        Sistemas = super().getDbObject.BuscaRegistro(f"'{self.getSecondLogin}", 'log_tentativas', 'login', "Registros", True);
+        super().getDbObject.BuscaRegistro(f"{self.getSecondLogin}", 'log_tentativas', 'login', "Registros", True);
+        Sistemas = super().getDbObject.getCursor.fetchall();
         QuantidadeAmostragemValida = 10;
 
         if len(Sistemas) > QuantidadeAmostragemValida:
-            for i in range(0, len(Sistemas), 1):
-                if self.getSistemaOperacional in Sistemas[i]['sistema']:
-                    return True;
+            return self.getSistemaOperacional in Sistemas['sistema_op'];
+
+        else:
+            return True;
 
     def ConfereLogin(self):
         if len(self.getLogin) > 0 and len(self.getLogin) <= 24:
@@ -44,14 +45,15 @@ class Dispositivo(VariaveisLogin):
             return False;
 
     def ConfereMaquina(self):
-        return False;
-        Maquinas = super().getDbObject.BuscaRegistro(f"'{self.getSecondLogin}'", 'log_tentativas', 'login', "Registros", True);
+        super().getDbObject.BuscaRegistro(f"{self.getSecondLogin}", 'log_tentativas', 'login', "Registros", True);
+        Maquinas = super().getDbObject.getCursor.fetchall();
         QuantidadeAmostragemValida = 10;
 
         if len(Maquinas) > QuantidadeAmostragemValida:
-            for i in range(0, len(Maquinas), 1):
-                if self.getMaquina in Maquinas[i]['maquina']:
-                    return True;
+            return self.GetMaquina in Maquinas;
+
+        else:
+            return True;
 
     def __repr__(self):
         Parametro = {'nome':[], 'resultado':[]};
@@ -68,7 +70,7 @@ class Dispositivo(VariaveisLogin):
         for i in range(0, len(Parametro['nome']), 1):
             print(f"    - {Parametro['nome'][i]} - {Parametro['resultado'][i]}");
 
-        if False in Parametro['resultado']:
+        if "False" in Parametro['resultado']:
             return "Dispositivo.        False\n";
 
         else:

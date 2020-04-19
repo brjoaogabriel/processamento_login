@@ -18,27 +18,24 @@ class Habitualidade:
         return self.__dispositivo;
 
     def __ConfereUsuario(self):
-        return True;
-        if self.__getUsuario == True:
-            return True;
+        return self.__getUsuario;
 
     def __ConfereAmbiente(self):
-        if self.__getAmbiente == True:
-            return True;
+        return self.__getAmbiente;
 
     def __ConfereDispositivo(self):
-        if self.__getDispositivo == True:
-            return True;
+        return self.__getDispositivo;
 
     def __repr__(self):
-        Parametro = [];
+        Parametro = {'nome':[], 'resultado':[]};
 
-        Parametro.append(self.__ConfereAmbiente() == True);
-        Parametro.append(self.__ConfereUsuario() == True);
-        Parametro.append(self.__ConfereDispositivo() == True);
+        Parametro['nome'].append('confere_ambiente');
+        Parametro['resultado'].append(self.__ConfereAmbiente())
 
-        if False in Parametro:
-            return "Não aprovado."
+        Parametro['nome'].append('confere_usuario');
+        Parametro['resultado'].append(self.__ConfereUsuario());
 
-        else:
-            return "Aprovado."
+        Parametro['nome'].append('confere_dispositivo');
+        Parametro['resultado'].append(self.__ConfereDispositivo())
+
+        return "Aprovado";

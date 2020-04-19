@@ -6,27 +6,32 @@ from classes.dispositivo import *;
 from classes.usuario import *;
 from classes.habitualidade import *;
 
-Login = str(input("Login:   "));
-Senha = str(input("Senha:   "));
-Email = str(input("Email:   "));
-print();
+def Validar_Usuario():
+    Login = str(input("Login:   "));
+    Senha = str(input("Senha:   "));
+    Email = str(input("Email:   "));
+    print();
 
-thisDatabaseObject = Database(3306, 'localhost', 'root', '', 'test');
+    thisDatabaseObject = Database(3306, 'localhost', 'root', '', 'test');
 
-thisUsuario = Usuario(Login, Senha, Email, thisDatabaseObject);
-thisUsuario.getValidado;
-print(thisUsuario);
+    thisUsuario = Usuario(Login, Senha, Email, thisDatabaseObject);
+    thisUsuario.getValidado;
+    print(thisUsuario);
 
-thisDispositivo = Dispositivo(thisDatabaseObject, thisUsuario.getLogin);
-thisDispositivo.getValidado;
-print(thisDispositivo);
+    thisDispositivo = Dispositivo(thisDatabaseObject, thisUsuario.getLogin);
+    thisDispositivo.getValidado;
+    print(thisDispositivo);
 
-thisAmbiente = Ambiente(thisDatabaseObject, thisDispositivo.getMaquina);
-thisAmbiente.getValidado;
-print(thisAmbiente);
+    thisAmbiente = Ambiente(thisDatabaseObject, thisDispositivo.getMaquina);
+    thisAmbiente.getValidado;
+    print(thisAmbiente);
 
-thisResposta = Habitualidade(thisUsuario.Validar_Parametro(), thisAmbiente.Validar_Parametro(), thisDispositivo.Validar_Parametro());
-thisResposta.Validar_Parametro();
-print(thisResposta);
+    thisResposta = Habitualidade(thisUsuario.Validar_Parametro(), thisAmbiente.Validar_Parametro(), thisDispositivo.Validar_Parametro());
+    thisResposta.Validar_Parametro();
+    print(thisResposta);
 
-DatabaseObject = None;
+    DatabaseObject = None;
+
+    return this thisResposta.Validar_Parametro();
+
+Validar_Usuario();
